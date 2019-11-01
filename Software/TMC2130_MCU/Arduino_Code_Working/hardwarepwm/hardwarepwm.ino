@@ -11,16 +11,17 @@ long prescaler = 256;
 #define MOSI 51
 #define SCK 52
 
-#define FREQ 10000
+int FREQ = 100;
+
 void setup() {
   pinMode(MOSI, OUTPUT);
   digitalWrite(MOSI, HIGH);
   pinMode(SCK, OUTPUT);
   digitalWrite(SCK, HIGH);
-  motorFrequency(1, FREQ, 1);  // motor number: 1, 2, 3, 4  frquency(speed) derection: 1, 0
-  motorFrequency(2, FREQ, 1); 
-  motorFrequency(3, FREQ, 1);  
-  motorFrequency(4, FREQ, 1); 
+  motorFrequency(1, FREQ, 1);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
+  motorFrequency(2, FREQ, 1);
+  motorFrequency(3, FREQ, 0);  
+  motorFrequency(4, FREQ, 0); 
 }
 void motorFrequency(int motorNum, int frequency, int direct){
   //motorNum = 1  pin 5   
@@ -84,10 +85,28 @@ void motorFrequency(int motorNum, int frequency, int direct){
 //  Serial.println(TCCR5B,BIN);
 //  delay(1000);
 }
+
+int acc_dir = 1;
+
 void loop() {
-//  Serial.begin(115200);
-//  Serial.println(TCCR5A,BIN);
-//  Serial.println(TCCR5B,BIN);
-//  delay(1000);
+  delayMicroseconds(500);
+  if(acc_dir){
+    FREQ++;
+  }
+  else{
+    FREQ--;
+  }
+
+  if(FREQ>10000){
+    acc_dir = 0;
+  }
+  else if(FREQ<1){
+    acc_dir = 1;
+  }
+  
+  motorFrequency(1, FREQ, 1);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
+  motorFrequency(2, FREQ, 1);
+  motorFrequency(3, FREQ, 0);  
+  motorFrequency(4, FREQ, 0); 
 }
 
