@@ -102,10 +102,10 @@ void motorFrequency(int motorNum, int frequency, int direct){
 
 int acc_dir = 1;
 int mode_select = 1;
-int F_Lim = 75;
+int F_Lim = 9000;
 
 void loop() {
-  delayMicroseconds(10000);
+  delayMicroseconds(100);
   if(acc_dir){
     FREQ++;
   }
@@ -113,7 +113,7 @@ void loop() {
     FREQ--;
   }
   if(FREQ>F_Lim){
-    delay(10000);
+    delay(3000);
     acc_dir = 0;
   }
   else if(FREQ<=60){
@@ -123,16 +123,16 @@ void loop() {
 
   if(mode_select){
 //    F_Lim = 12000/8;
-    motorFrequency(1, FREQ, 0);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
-    motorFrequency(2, FREQ, 0);
+    motorFrequency(1, FREQ, 1);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
+    motorFrequency(2, FREQ, 1);
     motorFrequency(3, FREQ, 0);  
     motorFrequency(4, FREQ, 0); 
   }
   else{
 //    F_Lim = 7500/8;
-    motorFrequency(1, FREQ, 1);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
+    motorFrequency(1, FREQ, 0);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
     motorFrequency(2, FREQ, 0);
-    motorFrequency(3, FREQ, 1);  
+    motorFrequency(3, FREQ, 0);  
     motorFrequency(4, FREQ, 0); 
   }
   
