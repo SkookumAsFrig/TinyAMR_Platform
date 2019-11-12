@@ -24,8 +24,10 @@ long prescaler = 1;
 #define SCALER_1024 B00000101
 int scaler[] = {SCALER_1, SCALER_8, SCALER_64, SCALER_256, SCALER_1024};
 int FREQ = 60;
+int lastdata[8] = {0,0,0,0,0,0,0,0};
 
 void setup() {
+  Serial.begin(9600);
   pinMode(MOSI, OUTPUT);
   digitalWrite(MOSI, HIGH);
   pinMode(SCK, OUTPUT);
@@ -38,6 +40,7 @@ void setup() {
   digitalWrite(CS3, MS3_State);
   pinMode(CS4, OUTPUT);
   digitalWrite(CS4, MS3_State);
+  pinMode(12, OUTPUT);
 }
 
 void motorFrequency(int motorNum, int frequency, int direct){
@@ -104,32 +107,92 @@ int acc_dir = 1;
 int mode_select = 1;
 int F_Lim = 9000;
 
-void loop() {
-  delayMicroseconds(100);
-  if(acc_dir){
-    FREQ++;
-  }
-  else{
-    FREQ--;
-  }
-  if(FREQ>F_Lim){
-    delay(3000);
-    acc_dir = 0;
-  }
-  else if(FREQ<=60){
-    acc_dir = 1;
-    mode_select = !mode_select;
-  }
 
+int* getBuffer(int* lastdata){
+    /***************************************************
+     * start char '$'
+     * acceleration end char '%'
+     * stepper1 end char '@'
+     * stepper2 end char '#'
+     * stepper3 end char '!'
+     * stepper4 end char '&'
+     * $acceleration%dir1,fqc1@dir2,fqc2#dir3,fqc3!dir4,fqc4&
+    ***************************************************/
+    int i = 1;
+    int dataindex = 0;
+    int flag; 
+    int* data = lastdata;
+    while(Serial.available()){
+    delay(3);
+    if(Serial.available()){
+      String buff = Serial.readString();
+      if(buff[0] != '$')
+        break;
+      digitalWrite(12, HIGH);
+      flag = false;
+      while(i < buff.length()){
+        if(buff[i] == ','){
+          flag = i;
+        }
+        if(buff[i] == '@'){
+          data[0] = (buff.substring(flag-1, flag)).toInt();
+          data[1] = (buff.substring(flag+1, i)).toInt();
+        }
+        if(buff[i] == '#'){
+          data[2] = (buff.substring(flag-1, flag)).toInt();
+          data[3] = (buff.substring(flag+1, i)).toInt();
+          
+        }
+        if(buff[i] == '!'){
+          data[4] = (buff.substring(flag-1, flag)).toInt();
+          data[5] = (buff.substring(flag+1, i)).toInt();
+        }
+        if(buff[i] == '&'){
+          data[6] = (buff.substring(flag-1, flag)).toInt();
+          data[7] = (buff.substring(flag+1, i)).toInt();
+        }
+        if(buff[i] == '%'){
+          data[8] = (buff.substring(1, i)).toInt();
+        }
+        i ++;
+      }
+      digitalWrite(12, LOW);
+      flag = true;
+      
+    }
+  }
+  return data;
+}
+String sep = "=======================";
+bool flag = true;
+void loop() {
+  
+  /***************************************************
+   * getbuff[0] dir1
+   * getbuff[1] fqc1
+   * getbuff[2] dir2
+   * getbuff[3] fqc2
+   * getbuff[4] dir3
+   * getbuff[5] fqc3
+   * getbuff[6] dir4
+   * getbuff[7] fqc4
+   * getbuff[8] acceleration
+    ***************************************************/
+  
+  
+  
+  int* getbuff = getBuffer(lastdata);
+  
+  
   if(mode_select){
-//    F_Lim = 12000/8;
+    F_Lim = 12000;
     motorFrequency(1, FREQ, 1);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
     motorFrequency(2, FREQ, 1);
-    motorFrequency(3, FREQ, 0);  
+    motorFrequency(3, FREQ, 0);
     motorFrequency(4, FREQ, 0); 
   }
   else{
-//    F_Lim = 7500/8;
+    F_Lim = 7500;
     motorFrequency(1, FREQ, 0);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
     motorFrequency(2, FREQ, 0);
     motorFrequency(3, FREQ, 0);  
