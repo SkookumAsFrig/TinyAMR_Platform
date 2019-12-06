@@ -72,23 +72,25 @@ int F_Lim = 9000;
 
 String sep = "=======================";
 
-  void loop() {   
+void loop() {   
   char buff[9];
   if(Serial.available()){
 //    digitalWrite(12, HIGH);
     Serial.readBytesUntil('\n', buff, 10);
-    data[0] = (((int)buff[0]) << 8) | buff[1];
-    data[1] = (((int)buff[2]) << 8) | buff[3];
-    data[2] = (((int)buff[4]) << 8) | buff[5];
-    data[3] = (((int)buff[6])<< 8) | buff[7];     
-    data[4] = buff[8];    
+    data[0] = (((int)buff[0]) << 8) | ((int)buff[1] & 0xFF);
+    data[1] = (((int)buff[2]) << 8) | ((int)buff[3] & 0xFF);
+    data[2] = (((int)buff[4]) << 8) | ((int)buff[5] & 0xFF);
+    data[3] = (((int)buff[6]) << 8) | ((int)buff[7] & 0xFF);     
+    data[4] = buff[8];
 //    digitalWrite(12, LOW);   
  
   for(int i = 0; i < 5; i ++){
     Serial.print(data[i]);
-    delayMicroseconds(300);
+//    delayMicroseconds(300);
     Serial.print(',');
   }
   Serial.println('\n');
-  }
+  Serial.println(buff);
+ }
+// Serial.println(((138) << 8) | (B11010000));
 }
