@@ -1,102 +1,44 @@
-#include <avr/interrupt.h>
 long system_clock = 16000000;
-
 long prescaler = 1;
-
 #define DIR_1 44
-
 #define STEP_1 5
-
 #define CS1 40
-
 #define DIR_2 48
-
 #define STEP_2 46
-
 #define CS2 53
-
 #define DIR_3 30
-
 #define STEP_3 11
-
 #define CS3 34
-
 #define DIR_4 28
-
 #define STEP_4 6
-
 #define CS4 24
-
 #define MOSI 51
-
 #define SCK 52
 
 #define MS3_State LOW
 
 #define SCALER_1 B00000001
-
 #define SCALER_8 B00000010
-
 #define SCALER_64 B00000011
-
 #define SCALER_256 B00000100
-
 #define SCALER_1024 B00000101
-
 int scaler[] = {SCALER_1, SCALER_8, SCALER_64, SCALER_256, SCALER_1024};
 
-int fqcy[4] = {0,0,0,0};
-
-int data[5] = {0,0,0,0,0};
-
-int timernumber = 252;
-
-
-
 void setup() {
-
   Serial.begin(57600);
-  Serial.setTimeout(10);
-
   pinMode(MOSI, OUTPUT);
-
   digitalWrite(MOSI, HIGH);
-
   pinMode(SCK, OUTPUT);
-
   digitalWrite(SCK, HIGH);
-
   pinMode(CS1, OUTPUT);
-
   digitalWrite(CS1, MS3_State);
-
   pinMode(CS2, OUTPUT);
-
   digitalWrite(CS2, MS3_State);
-
   pinMode(CS3, OUTPUT);
-
   digitalWrite(CS3, MS3_State);
-
   pinMode(CS4, OUTPUT);
-
   digitalWrite(CS4, MS3_State);
 
-  pinMode(12, OUTPUT);
-
-  noInterrupts();
-
-  TCCR2A = 0x00; // overflow mode
-
-  TCCR2B = 0x05; // 128 prescaler
-
-  TCNT2 = TimerInterruptFrequency(802);
-
-  TIFR2 = 0x00;
-
-  TIMSK2 = 0x01;  // enable timer compare interrupt A
-
-  interrupts();             // enable all interrupts
   pinMode(STEP_1, OUTPUT);
   pinMode(DIR_1, OUTPUT);
   pinMode(STEP_2, OUTPUT);
@@ -110,34 +52,7 @@ void setup() {
   TCCR4A = B01000011;    // Fast PWM
   TCCR1A = B01000011;    // Fast PWM
   TCCR5A = B01000011;    // Fast PWM
-
 }
-
-int stp_sz = 20;
-
-ISR(TIMER2_OVF_vect)          // timer compare interrupt service routine
-{
-  // motor frequency ++
-  for(int i = 0; i < 4; i++){
-    int diff = data[i] - fqcy[i];
-    if(diff > stp_sz)
-      fqcy[i] += stp_sz;
-    else if(diff < -stp_sz)
-      fqcy[i] -= stp_sz;
-    else
-      fqcy[i] = data[i];
-    motorFrequency(i+1, fqcy[i]);
-  }
-  
-//  digitalWrite(12, digitalRead(12) ^ 1);
-  TCNT2 = data[4];
-  TIFR2 = 0x00;
-}
-
-long int TimerInterruptFrequency(long int Fqec){
-  return 256 - 125000 / Fqec;
-}
-
 
 void motorFrequency(int motorNum, int frequency){
   //motorNum = 1  pin 5   
@@ -184,7 +99,7 @@ void motorFrequency(int motorNum, int frequency){
       else
         TCCR1B = TCCR1B & B11100000 | B00011000;         // Prescaler = 0, turn PWM off
       OCR1A = Top;
-      if(frequency<0){ 
+      if(frequency>0){ 
         digitalWrite(DIR_3, HIGH);
       }else{
         digitalWrite(DIR_3, LOW);
@@ -196,7 +111,7 @@ void motorFrequency(int motorNum, int frequency){
       else
         TCCR4B = TCCR4B & B11100000 | B00011000;         // Prescaler = 0, turn PWM off
       OCR4A = Top;
-      if(frequency<0){ 
+      if(frequency>0){ 
         digitalWrite(DIR_4, HIGH);
       }else{
         digitalWrite(DIR_4, LOW);
@@ -206,38 +121,17 @@ void motorFrequency(int motorNum, int frequency){
 
 }
 
-
-
 int acc_dir = 1;
-
 int mode_select = 1;
+int F_Lim = 75;
+int FREQ = 600;
 
-int F_Lim = 9000;
-
-void loop() {   
-  char buff[9];
-  digitalWrite(12, HIGH);
-  if(Serial.available()>0){
-    digitalWrite(12, HIGH);
-    Serial.readBytesUntil(0xFF, buff, 160);
-    data[0] = ((((int)buff[0]) << 9) | (((int)buff[1] & 0x7F) << 2))/4;
-    data[1] = ((((int)buff[2]) << 9) | (((int)buff[3] & 0x7F) << 2))/4;
-    data[2] = ((((int)buff[4]) << 9) | (((int)buff[5] & 0x7F) << 2))/4;
-    data[3] = ((((int)buff[6]) << 9) | (((int)buff[7] & 0x7F) << 2))/4;
-    data[4] = (int)buff[8] & 0xFF;
-    digitalWrite(12, LOW);
- 
-  for(int i = 0; i < 5; i ++){
-    Serial.print(data[i]);
-    Serial.print(',');
-  }
-  
-  for(int i = 0; i < 4; i ++){
-    Serial.print(fqcy[i]);
-    Serial.print(',');
-  }
-  Serial.println('\n');
- }
- digitalWrite(12, LOW);
+void loop() {
+  delay(1000);
+  Serial.println("still running");
+  motorFrequency(4, FREQ);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
+//  motorFrequency(2, 0, 0);
+//  motorFrequency(3, 0, 0);
+//  motorFrequency(4, 0, 0);
   
 }
