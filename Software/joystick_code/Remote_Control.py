@@ -34,7 +34,11 @@ i2 = 0
 i3 = 0
 i4 = 0
 
+global spd_mode
+spd_mode = 1
+
 def gamepad_control(gamepad, speed):
+	global spd_mode
 	global i1
 	global i2
 	global i3
@@ -53,8 +57,11 @@ def gamepad_control(gamepad, speed):
 					oneval = 0
 				else:
 					oneval = absevent.event.value
-				i1 = i2 = (int)(oneval/4)
-				#print(i1,i2)
+
+				if spd_mode == 1:
+					i1 = i2 = (int)(oneval/4)
+				else:
+					i1 = i2 = (int)(oneval/16)
 			# right stick operation
 			elif stick_id == 'ABS_RX':
 				event_time = absevent.event.timestamp()
@@ -63,13 +70,21 @@ def gamepad_control(gamepad, speed):
 					two_val = 0
 				else:
 					two_val = absevent.event.value
-				i3 = i4 = (int)(two_val/4)
+				
+				if spd_mode == 1:
+					i3 = i4 = (int)(two_val/4)
+				else:
+					i3 = i4 = (int)(two_val/16)
 
 		elif event.type == ecodes.EV_KEY:
 			keyevent = categorize(event)
 			if keyevent.keystate == KeyEvent.key_down:
 				print(keyevent.keycode)
 				if keyevent.keycode[0] == 'BTN_A':
+					if spd_mode == 1:
+						spd_mode = 2
+					else:
+						spd_mode = 1
 					print('Back')
 				elif keyevent.keycode[1] == 'BTN_Y':
 					print('Foward')
@@ -78,7 +93,7 @@ def gamepad_control(gamepad, speed):
 				elif keyevent.keycode[1] == 'BTN_X':
 					print('Left')
 				elif keyevent.keycode == 'BTN_THUMBR' or keyevent.keycode == 'BTN_THUMBL':
-					print('Stop')	
+					print('Stop')
 				elif keyevent.keycode == 'BTN_TR':
 					speed += 50
 					if speed > 550:

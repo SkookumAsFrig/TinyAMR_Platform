@@ -84,6 +84,10 @@ void setup() {
 
   pinMode(12, OUTPUT);
 
+  while(!Serial.available()){
+    delay(100);
+  }
+
   noInterrupts();
 
   TCCR2A = 0x00; // overflow mode
@@ -220,10 +224,10 @@ void loop() {
   if(Serial.available()>0){
     digitalWrite(12, HIGH);
     Serial.readBytesUntil(0xFF, buff, 160);
-    data[0] = ((((int)buff[0]) << 9) | (((int)buff[1] & 0x7F) << 2))/4;
-    data[1] = ((((int)buff[2]) << 9) | (((int)buff[3] & 0x7F) << 2))/4;
-    data[2] = ((((int)buff[4]) << 9) | (((int)buff[5] & 0x7F) << 2))/4;
-    data[3] = ((((int)buff[6]) << 9) | (((int)buff[7] & 0x7F) << 2))/4;
+    data[0] = ((((int)buff[0]) << 9) | (((int)buff[1] & 0x7F) << 2))/2;
+    data[1] = ((((int)buff[2]) << 9) | (((int)buff[3] & 0x7F) << 2))/2;
+    data[2] = ((((int)buff[4]) << 9) | (((int)buff[5] & 0x7F) << 2))/2;
+    data[3] = ((((int)buff[6]) << 9) | (((int)buff[7] & 0x7F) << 2))/2;
     data[4] = (int)buff[8] & 0xFF;
     digitalWrite(12, LOW);
  
