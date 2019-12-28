@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------------------------------------------------------------------
-NCDrill File Report For: DriverBoard.PcbDoc   12/21/2019  3:30:02 AM
+NCDrill File Report For: DriverBoard.PcbDoc   12/21/2019  7:59:12 PM
 ----------------------------------------------------------------------------------------------------------------------------------
 
 Layer Pair : Top Layer to Bottom Layer
@@ -7,11 +7,10 @@ ASCII RoundHoles File : DriverBoard.TXT
 
 Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
 ----------------------------------------------------------------------------------------------------------------------------------
-T1      0.2mm (8mil)                                              Round             49        PTH        408.27mm (16.07inch)
-T2      0.5mm (20mil)                                             Round             70        PTH        237.94mm (9.37inch)
-T3      1mm (39mil)                                               Round             142       PTH        608.36mm (23.95inch)
-T4      1.5mm (59mil)                                             Round             6         PTH        41.64mm (1.64inch)
-T5      2.5mm (98mil)                                             Round             2         PTH        9.50mm (0.37inch)
+T1      0.3mm (12mil)                                             Round             119       PTH        607.04mm (23.90inch)
+T2      1mm (39mil)                                               Round             142       PTH        608.36mm (23.95inch)
+T3      1.5mm (59mil)                                             Round             6         PTH        41.64mm (1.64inch)
+T4      2.5mm (98mil)                                             Round             2         PTH        9.50mm (0.37inch)
 ----------------------------------------------------------------------------------------------------------------------------------
 Totals                                                                              269
 

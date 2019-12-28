@@ -123,99 +123,103 @@ GenerateClassCluster=0
 DocumentUniqueId=
 
 [GeneratedDocument1]
-DocumentPath=Project Outputs for DriverBoard\Design Rule Check - DriverBoard.html
+DocumentPath=Project Outputs for DriverBoard\BOM\Bill of Materials-DriverBoard.xlsx
 DItemRevisionGUID=
 
 [GeneratedDocument2]
-DocumentPath=Project Outputs for Free Documents\NC Drill\DriverBoard.DRR
+DocumentPath=Project Outputs for DriverBoard\Design Rule Check - DriverBoard.html
 DItemRevisionGUID=
 
 [GeneratedDocument3]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.EXTREP
+DocumentPath=Project Outputs for DriverBoard\NC Drill\DriverBoard.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument4]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.G1
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument5]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.G2
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.G1
 DItemRevisionGUID=
 
 [GeneratedDocument6]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GBL
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.G2
 DItemRevisionGUID=
 
 [GeneratedDocument7]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GBO
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GBL
 DItemRevisionGUID=
 
 [GeneratedDocument8]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GBP
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GBO
 DItemRevisionGUID=
 
 [GeneratedDocument9]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GBS
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GBP
 DItemRevisionGUID=
 
 [GeneratedDocument10]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GKO
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GBS
 DItemRevisionGUID=
 
 [GeneratedDocument11]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GM1
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GKO
 DItemRevisionGUID=
 
 [GeneratedDocument12]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GM2
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GM1
 DItemRevisionGUID=
 
 [GeneratedDocument13]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GM3
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GM2
 DItemRevisionGUID=
 
 [GeneratedDocument14]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GM29
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GM3
 DItemRevisionGUID=
 
 [GeneratedDocument15]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GPB
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GM29
 DItemRevisionGUID=
 
 [GeneratedDocument16]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GPT
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GPB
 DItemRevisionGUID=
 
 [GeneratedDocument17]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GTL
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GPT
 DItemRevisionGUID=
 
 [GeneratedDocument18]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GTO
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GTL
 DItemRevisionGUID=
 
 [GeneratedDocument19]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GTP
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GTO
 DItemRevisionGUID=
 
 [GeneratedDocument20]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.GTS
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GTP
 DItemRevisionGUID=
 
 [GeneratedDocument21]
-DocumentPath=Project Outputs for Free Documents\NC Drill\DriverBoard.LDP
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.GTS
 DItemRevisionGUID=
 
 [GeneratedDocument22]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.REP
+DocumentPath=Project Outputs for DriverBoard\NC Drill\DriverBoard.LDP
 DItemRevisionGUID=
 
 [GeneratedDocument23]
-DocumentPath=Project Outputs for Free Documents\Gerber\DriverBoard.RUL
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.REP
 DItemRevisionGUID=
 
 [GeneratedDocument24]
-DocumentPath=Project Outputs for Free Documents\NC Drill\DriverBoard.TXT
+DocumentPath=Project Outputs for DriverBoard\Gerber\DriverBoard.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument25]
+DocumentPath=Project Outputs for DriverBoard\NC Drill\DriverBoard.TXT
 DItemRevisionGUID=
 
 [Configuration1]
@@ -226,6 +230,9 @@ ReleaseItemId=
 Variant=[No Variations]
 OutputJobsCount=0
 ContentTypeGUID=CB6F2064-E317-11DF-B822-12313F0024A2
+
+[Generic_EDE]
+OutputDir=
 
 [OutputGroup1]
 Name=Netlist Outputs
