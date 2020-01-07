@@ -124,14 +124,16 @@ void motorFrequency(int motorNum, int frequency){
 int acc_dir = 1;
 int mode_select = 1;
 int F_Lim = 75;
-int FREQ = 600;
+int FREQ = 8000;
 
 void loop() {
   delay(1000);
   Serial.println("still running");
-  motorFrequency(4, FREQ);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
+  motorFrequency(3, FREQ);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
 //  motorFrequency(2, 0, 0);
 //  motorFrequency(3, 0, 0);
 //  motorFrequency(4, 0, 0);
+  delay(1000);
+  FREQ = -FREQ;
   
 }
