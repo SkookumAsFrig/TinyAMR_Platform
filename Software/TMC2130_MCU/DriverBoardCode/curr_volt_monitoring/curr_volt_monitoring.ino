@@ -20,7 +20,9 @@ float batcells[4];
 
 void setup() {
   // initialize serial communications at 9600 bps:
-  Serial.begin(115200); 
+  Serial.begin(115200);
+  pinMode(49, OUTPUT); 
+  pinMode(36, OUTPUT); 
 }
 
 float print_val = 0.1;
@@ -104,8 +106,13 @@ void loop() {
     else
       Serial.println("");
   }
-
-  delay(2000);                     
+  digitalWrite(49, HIGH);
+  digitalWrite(36, HIGH);
+  delay(1000);
+  digitalWrite(49, LOW);
+  digitalWrite(36, LOW);
+  delay(1000);
+    
 }
 
 
