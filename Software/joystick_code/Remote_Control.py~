@@ -56,13 +56,13 @@ def gamepad_control(gamepad, speed):
 			if stick_id == 'ABS_X':
 				event_time = absevent.event.timestamp()
 			elif stick_id == 'ABS_Y':
-				if abs(absevent.event.value) < 1800:
+				if abs(absevent.event.value) < 160:
 					oneval = 0
 				else:
 					oneval = absevent.event.value
 
 				if spd_mode == 1:
-					i1 = i2 = (int)(oneval/6)
+					i1 = i2 = (int)(oneval/8)
 					num5 = 80
 				else:
 					i1 = i2 = (int)(oneval/16)
@@ -71,13 +71,13 @@ def gamepad_control(gamepad, speed):
 			elif stick_id == 'ABS_RX':
 				event_time = absevent.event.timestamp()
 			elif stick_id == 'ABS_RY':
-				if abs(absevent.event.value) < 1800:
+				if abs(absevent.event.value) < 160:
 					two_val = 0
 				else:
 					two_val = absevent.event.value
 				
 				if spd_mode == 1:
-					i3 = i4 = (int)(two_val/6)
+					i3 = i4 = (int)(two_val/8)
 					num5 = 80
 				else:
 					i3 = i4 = (int)(two_val/16)

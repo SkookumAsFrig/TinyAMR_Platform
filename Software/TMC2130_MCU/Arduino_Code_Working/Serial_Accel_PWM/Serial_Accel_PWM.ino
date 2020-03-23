@@ -31,6 +31,14 @@ long prescaler = 1;
 
 #define SCK 52
 
+#define EN1 38
+
+#define EN2 49
+
+#define EN3 36
+
+#define EN4 22
+
 #define MS3_State LOW
 
 #define SCALER_1 B00000001
@@ -51,9 +59,35 @@ int data[5] = {0,0,0,0,0};
 
 int timernumber = 252;
 
-
+int swval = 0;
 
 void setup() {
+
+  pinMode(25, OUTPUT);
+  digitalWrite(25, LOW);
+  pinMode(27, INPUT_PULLUP);
+
+  pinMode(EN1, OUTPUT);
+  digitalWrite(EN1, HIGH);
+  pinMode(EN2, OUTPUT);
+  digitalWrite(EN2, HIGH);
+  pinMode(EN3, OUTPUT);
+  digitalWrite(EN3, HIGH);
+  pinMode(EN4, OUTPUT);
+  digitalWrite(EN4, HIGH);
+
+  while (digitalRead(27)){
+    delay(1);
+  }
+
+  pinMode(EN1, OUTPUT);
+  digitalWrite(EN1, LOW);
+  pinMode(EN2, OUTPUT);
+  digitalWrite(EN2, LOW);
+  pinMode(EN3, OUTPUT);
+  digitalWrite(EN3, LOW);
+  pinMode(EN4, OUTPUT);
+  digitalWrite(EN4, LOW);
 
   Serial.begin(57600);
   Serial.setTimeout(10);

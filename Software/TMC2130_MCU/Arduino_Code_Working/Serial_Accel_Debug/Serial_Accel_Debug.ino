@@ -15,6 +15,8 @@ long prescaler = 1;
 #define MOSI 51
 #define SCK 52
 
+#define EN_4 22
+
 #define MS3_State LOW
 
 #define SCALER_1 B00000001
@@ -38,6 +40,9 @@ void setup() {
   digitalWrite(CS3, MS3_State);
   pinMode(CS4, OUTPUT);
   digitalWrite(CS4, MS3_State);
+
+  pinMode(EN_4, OUTPUT);
+  digitalWrite(EN_4, LOW);
 
   pinMode(STEP_1, OUTPUT);
   pinMode(DIR_1, OUTPUT);
@@ -129,7 +134,7 @@ int FREQ = 8000;
 void loop() {
   delay(1000);
   Serial.println("still running");
-  motorFrequency(3, FREQ);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
+  motorFrequency(4, FREQ);  // motor number: 1, 2, 3, 4  frquency(speed) direction: 1, 0
 //  motorFrequency(2, 0, 0);
 //  motorFrequency(3, 0, 0);
 //  motorFrequency(4, 0, 0);
